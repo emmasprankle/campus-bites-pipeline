@@ -1,0 +1,18 @@
+# PostgreSQL data volume (local only)
+postgres_data/
+
+# Environment files
+.env
+.env.local
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/

@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:16
+    container_name: campus_bites_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: campus_bites
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/data
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
