@@ -51,10 +51,24 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## GUI connection
+
+Connect with TablePlus, DBeaver, or similar:
+
+| Setting  | Value        |
+|----------|--------------|
+| Host     | localhost    |
+| Port     | 5432         |
+| Database | campus_bites |
+| User     | postgres     |
+| Password | postgres     |
+
 ## Architecture
 
 This is a single-table analytics database. The entire dataset lives in one table:
 
 **`orders`** — 1,132 rows of campus food delivery orders with fields: `order_id`, `order_date`, `order_time`, `customer_segment`, `order_value`, `cuisine_type`, `delivery_time_mins`, `promo_code_used`, `is_reorder`.
 
-The data flow is: `data/campus_bites_orders.csv` → `load_data.py` → `orders` table in Postgres. There is no `init.sql`; all schema creation and loading is handled by `load_data.py`.
+**Schema note:** `promo_code_used` and `is_reorder` are stored as `TEXT`, not booleans. Filter them with string literals: `WHERE promo_code_used = 'Yes'`.
+
+The data flow is: `data/campus_bites_orders.csv` → `load_data.py` → `orders` table in Postgres. There is no `init.sql`; all schema creation and loading is handled by `load_data.py`. The `./data` directory is also volume-mounted inside the container at `/data`.
